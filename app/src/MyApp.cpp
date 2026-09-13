@@ -1,5 +1,8 @@
-//
-// Created by owl on 9/13/26.
-//
+#include <MyApp.hpp>
+#include <spdlog/spdlog.h>
 
-#include "MyApp.h"
+namespace app {
+    void MyApp::app_setup(){
+        spdlog::info("App setup complete");
+    }
+}
