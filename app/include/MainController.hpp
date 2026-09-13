@@ -9,6 +9,7 @@
 
 namespace app {
 
+
 class MainController: public engine::core::Controller {
     void initialize() override;
 
@@ -17,6 +18,8 @@ class MainController: public engine::core::Controller {
     void draw() override;
     void begin_draw() override;
     void end_draw() override;
+    void update_camera();
+    void update() override;
 
 public:
     std::string_view name() const override {
