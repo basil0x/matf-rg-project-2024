@@ -1,6 +1,15 @@
 {
   "resources": {
     "models": {
+      "backpack": {
+        "path": "backpack/backpack.obj"
+      },
+      "barLow": {
+        "path": "bar/BarLow.obj"
+      },
+      "cube" : {
+        "path": "cube/cube.obj"
+      }
     }
   },
   "window": {
