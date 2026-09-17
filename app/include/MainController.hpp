@@ -20,6 +20,7 @@ class MainController: public engine::core::Controller {
     bool loop() override;
     void draw_bar();
     void draw_gui();
+    void draw_skybox();
     void draw() override;
     void begin_draw() override;
     void end_draw() override;
@@ -41,7 +42,7 @@ class MainController: public engine::core::Controller {
 
 
     //Modes
-    bool interactMode{false};
+    bool interactMode{true};
 
 
     //Lighting

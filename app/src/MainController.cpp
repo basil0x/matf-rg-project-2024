@@ -41,7 +41,7 @@ public:
         // Model
         auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
         auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
-        engine::resources::Model * bar = resources->model("barLow");
+        engine::resources::Model * bar = resources->model("room");
 
 
         // Shader
@@ -63,8 +63,8 @@ public:
 
 
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-        model = glm::scale(model, glm::vec3(0.2f));
+        model = glm::translate(model, glm::vec3(0.0f, -2.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(1.0f));
         shader->set_mat4("model",model);
 
 
@@ -91,8 +91,14 @@ public:
             ImGui::End();
             graphics->end_gui();
     }
+    void MainController::draw_skybox() {
+        auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
+        auto graphics  = engine::core::Controller::get<engine::graphics::GraphicsController>();
+        graphics->draw_skybox(resources->shader("skybox"), resources->skybox("skybox"));
+    }
     void MainController::draw() {
         draw_bar();
+        draw_skybox();
 
         // TODO: Fix Camera Reposition on toggle
         if (interactMode) {
@@ -158,7 +164,7 @@ public:
 
         // Events
         if (platform->key(engine::platform::KEY_1).state() == engine::platform::Key::State::JustPressed) {
-            m_events.clear();
+            //m_events.clear();
 
             m_events.push_back({2.0f, 0.0f, false, [this]() {
                 pointLightIntensity = 0.0f;

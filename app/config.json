@@ -1,20 +1,15 @@
 {
   "resources": {
     "models": {
-      "backpack": {
-        "path": "backpack/backpack.obj"
-      },
-      "barLow": {
-        "path": "bar/BarLow.obj"
-      },
-      "cube" : {
-        "path": "cube/cube.obj"
+      "room": {
+        "path": "Room/room.obj",
+        "flip_uvs": true
       }
     }
   },
   "window": {
-    "height": 600,
-    "title": "Hello, window!",
-    "width": 800
+    "height": 1080,
+    "title": "Room",
+    "width": 1920
   }
 }
