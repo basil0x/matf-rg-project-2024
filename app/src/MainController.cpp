@@ -83,6 +83,12 @@ public:
             ImGui::ColorEdit3("Point Color", &pointLightColor.x);
             ImGui::SliderFloat("Point Intensity", &pointLightIntensity, 0.0f, 3.0f);
             ImGui::End();
+
+            ImGui::Begin("Controls");
+            ImGui::Text("Camera     - W A S D + Mouse");
+            ImGui::Text("GUI toggle - TAB");
+            ImGui::Text("Event Demo - 1 , 2 , 3 etc...");
+            ImGui::End();
             graphics->end_gui();
     }
     void MainController::draw() {
