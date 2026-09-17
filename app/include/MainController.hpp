@@ -9,6 +9,7 @@
 
 
 #include <engine/core/Controller.hpp>
+#include <functional>
 
 namespace app {
 
@@ -23,8 +24,24 @@ class MainController: public engine::core::Controller {
     void begin_draw() override;
     void end_draw() override;
     void update_camera();
+    void update_events();
     void update() override;
+    void poll_events() override;
 
+    //Events
+
+    struct TimedEvent {
+        float delay;
+        float elapsed{0.0f};
+        bool triggered{false};
+        std::function<void()> action;
+    };
+
+    std::vector<TimedEvent> m_events;
+
+
+    //Modes
+    bool interactMode{false};
 
 
     //Lighting
@@ -41,9 +58,6 @@ public:
     std::string_view name() const override {
         return "app:MainController";
     }
-
-    //Modes
-    bool interactMode{false};
 };
 }// namespace app
 

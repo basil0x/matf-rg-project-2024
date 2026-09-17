@@ -87,7 +87,11 @@ public:
     }
     void MainController::draw() {
         draw_bar();
-        draw_gui();
+
+        // TODO: Fix Camera Reposition on toggle
+        if (interactMode) {
+            draw_gui();
+        }
     }
     void MainController::begin_draw() {
         engine::graphics::OpenGL::clear_buffers();
@@ -122,7 +126,46 @@ public:
             camera->move_camera(engine::graphics::Camera::Movement::RIGHT, dt * speed);
         }
     }
+    void MainController::update_events() {
+        float dt = engine::core::Controller::get<engine::platform::PlatformController>()->dt();
+        for (auto& event : m_events) {
+            if (event.triggered) continue;
+            event.elapsed += dt;
+            if (event.elapsed >= event.delay) {
+                event.action();
+                event.triggered = true;
+            }
+        }
+    }
     void MainController::update() {
         update_camera();
+        update_events();
+    }
+    void MainController::poll_events() {
+        auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
+
+        // Gui Interaction
+        if (platform->key(engine::platform::KEY_TAB).state() == engine::platform::Key::State::JustPressed) {
+            interactMode = !interactMode;
+            platform->set_enable_cursor(interactMode);
+        }
+
+        // Events
+        if (platform->key(engine::platform::KEY_1).state() == engine::platform::Key::State::JustPressed) {
+            m_events.clear();
+
+            m_events.push_back({2.0f, 0.0f, false, [this]() {
+                pointLightIntensity = 0.0f;
+            }});
+
+            m_events.push_back({6.0f, 0.0f, false, [this]() {
+                pointLightColor = glm::vec3(1.0f, 0.0f, 1.0f);
+                pointLightIntensity = 1.5f;
+            }});
+
+            m_events.push_back({5.0f, 0.0f, false, [this]() {
+                dirLightIntensity = 0.0f;
+            }});
+        }
     }
     }// namespace app
