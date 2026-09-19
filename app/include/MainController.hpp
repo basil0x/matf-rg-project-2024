@@ -6,15 +6,17 @@
 #define MATF_RG_PROJECT_2024_MAINCONTROLLER_HPP
 
 #include "glm/vec3.hpp"
+#include <engine/util/TimedEvent.hpp>
 
 
 #include <engine/core/Controller.hpp>
+
 #include <functional>
 
 namespace app {
 
 
-class MainController: public engine::core::Controller {
+class MainController : public engine::core::Controller {
     void initialize() override;
 
     bool loop() override;
@@ -31,29 +33,22 @@ class MainController: public engine::core::Controller {
 
     //Events
 
-    struct TimedEvent {
-        float delay;
-        float elapsed{0.0f};
-        bool triggered{false};
-        std::function<void()> action;
-    };
-
-    std::vector<TimedEvent> m_events;
+    engine::util::TimedEventManager m_timed_events;
 
 
     //Modes
-    bool interactMode{true};
+    bool m_interact_mode{true};
 
 
     //Lighting
 
-    glm::vec3 dirLightDirection{-0.2f, -1.0f, -0.3f};
-    glm::vec3 dirLightColor{1.0f, 1.0f, 1.0f};
-    float dirLightIntensity{1.0f};
+    glm::vec3 m_dir_light_direction{-0.2f, -1.0f, -0.3f};
+    glm::vec3 m_dir_light_color{1.0f, 1.0f, 1.0f};
+    float m_dir_light_intensity{1.0f};
 
-    glm::vec3 pointLightPos{0.0f, 5.0f, 0.0f};
-    glm::vec3 pointLightColor{1.0f, 0.8f, 0.4f};
-    float pointLightIntensity{1.0f};
+    glm::vec3 m_point_light_pos{0.0f, 5.0f, 0.0f};
+    glm::vec3 m_point_light_color{1.0f, 0.8f, 0.4f};
+    float m_point_light_intensity{1.0f};
 
 public:
     std::string_view name() const override {

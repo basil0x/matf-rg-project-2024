@@ -1,4 +1,4 @@
-#include "../include/MainController.hpp"
+#include <MainController.hpp>
 
 
 #include <MyApp.hpp>
