@@ -8,7 +8,7 @@ class MyApp : public engine::core::App {
     void app_setup() override;
 };
 
-}
+}// namespace app
 
 
 #endif
